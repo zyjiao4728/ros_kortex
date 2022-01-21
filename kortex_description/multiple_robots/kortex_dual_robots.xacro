@@ -23,13 +23,13 @@
         <child link="$(arg left_prefix)base_link" />
         <parent link="world" />
         <!-- Here you can change the origin of the left arm-->
-        <origin xyz="-1 0 0" rpy="0 0 0" />    
+        <origin xyz="0 0.66 0" rpy="0 0 0" />    
     </joint> 
     <joint name="world_to_$(arg right_prefix)root" type="fixed">
         <child link="$(arg right_prefix)base_link" />
         <parent link="world" />
         <!-- Here you can change the origin of the right arm -->
-        <origin xyz="1 0 0" rpy="0 0 0" />    
+        <origin xyz="0 0 0" rpy="0 0 0" />    
     </joint> 
 
     <xacro:load_robot 
