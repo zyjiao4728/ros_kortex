@@ -49,12 +49,6 @@
                 " />
   -->
 
-  <!-- Planning Functionality -->
-  <include ns="move_group" file="$(find gen3_robotiq_2f_85_move_it_config)/launch/planning_pipeline.launch.xml">
-    <arg name="pipeline" value="$(arg pipeline)" />
-    <arg name="prefix" value="$(arg prefix)"/>
-  </include>
-
   <!-- Planning Pipelines -->
   <group ns="move_group/planning_pipelines">
 
