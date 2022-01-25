@@ -52,9 +52,42 @@
   <!-- Planning Functionality -->
   <include ns="move_group" file="$(find gen3_robotiq_2f_85_move_it_config)/launch/planning_pipeline.launch.xml">
     <arg name="pipeline" value="ompl" />
-    <arg name="prefix" value="$(arg prefix)" />
+    <arg name="prefix" value="$(arg prefix)"/>
   </include>
 
+  <!-- Planning Pipelines -->
+  <group ns="move_group/planning_pipelines">
+
+    <!-- OMPL -->
+    <include file="$(find gen3_robotiq_2f_85_move_it_config)/launch/planning_pipeline.launch.xml">
+      <arg name="pipeline" value="ompl" />
+      <arg name="prefix" value="$(arg prefix)" />
+    </include>
+
+    <!-- CHOMP -->
+    <include file="$(find gen3_robotiq_2f_85_move_it_config)/launch/planning_pipeline.launch.xml">
+      <arg name="pipeline" value="chomp" />
+      <arg name="prefix" value="$(arg prefix)" />
+    </include>
+
+    <!-- Trajopt -->
+    <include file="$(find gen3_robotiq_2f_85_move_it_config)/launch/planning_pipeline.launch.xml">
+      <arg name="pipeline" value="trajopt" />
+      <arg name="prefix" value="$(arg prefix)" />
+    </include>
+
+    <!-- Pilz Industrial Motion -->
+    <include file="$(find gen3_robotiq_2f_85_move_it_config)/launch/planning_pipeline.launch.xml">
+      <arg name="pipeline" value="pilz_industrial_motion_planner" />
+      <arg name="prefix" value="$(arg prefix)" />
+    </include>
+
+    <!-- Support custom planning pipeline -->
+    <include if="$(eval arg('pipeline') not in ['ompl', 'chomp', 'pilz_industrial_motion_planner'])" file="$(find gen3_robotiq_2f_85_move_it_config)/launch/planning_pipeline.launch.xml">
+      <arg name="pipeline" value="$(arg pipeline)" />
+      <arg name="prefix" value="$(arg prefix)" />
+    </include>
+  </group>
 
   <!-- Trajectory Execution Functionality -->
   <include ns="move_group" file="$(find gen3_robotiq_2f_85_move_it_config)/launch/trajectory_execution.launch.xml" if="$(arg allow_trajectory_execution)">
