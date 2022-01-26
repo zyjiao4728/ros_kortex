@@ -49,12 +49,6 @@
                 " />
   -->
 
-  <!-- Planning Functionality -->
-  <include ns="move_group" file="$(find gen3_robotiq_2f_85_move_it_config)/launch/planning_pipeline.launch.xml">
-    <arg name="pipeline" value="ompl" />
-    <arg name="prefix" value="$(arg prefix)"/>
-  </include>
-
   <!-- Planning Pipelines -->
   <group ns="move_group/planning_pipelines">
 
@@ -111,6 +105,7 @@
     <param name="allow_trajectory_execution" value="$(arg allow_trajectory_execution)" />
     <param name="max_safe_path_cost" value="$(arg max_safe_path_cost)" />
     <param name="jiggle_fraction" value="$(arg jiggle_fraction)" />
+    <param name="default_planning_pipeline" value="$(arg pipeline)" />
     <param name="capabilities" value="$(arg capabilities)" />
     <param name="disable_capabilities" value="$(arg disable_capabilities)" />
 
