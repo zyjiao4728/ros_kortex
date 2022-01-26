@@ -64,12 +64,6 @@
       <arg name="prefix" value="$(arg prefix)" />
     </include>
 
-    <!-- Trajopt -->
-    <include file="$(find gen3_robotiq_2f_85_move_it_config)/launch/planning_pipeline.launch.xml">
-      <arg name="pipeline" value="trajopt" />
-      <arg name="prefix" value="$(arg prefix)" />
-    </include>
-
     <!-- Pilz Industrial Motion -->
     <include file="$(find gen3_robotiq_2f_85_move_it_config)/launch/planning_pipeline.launch.xml">
       <arg name="pipeline" value="pilz_industrial_motion_planner" />
