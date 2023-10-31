@@ -24,15 +24,19 @@ You can find the instructions to install ROS Kinetic [here](http://wiki.ros.org/
 These are the instructions to run in a terminal to create the workspace, clone the `ros_kortex` repository and install the necessary ROS dependencies:
 
         sudo apt install python3 python3-pip
-        sudo python3 -m pip install conan
+        sudo python3 -m pip install conan==1.59
         conan config set general.revisions_enabled=1
         conan profile new default --detect > /dev/null
         conan profile update settings.compiler.libcxx=libstdc++11 default
         mkdir -p catkin_workspace/src
         cd catkin_workspace/src
-        git clone https://github.com/Kinovarobotics/ros_kortex.git
+        git clone -b <branch-name> https://github.com/Kinovarobotics/ros_kortex.git
         cd ../
         rosdep install --from-paths src --ignore-src -y
+
+> `<branch-name>` corresponds to the branch matching your ROS version (noetic-devel, melodic-devel, kinetic-devel)
+
+> Instructions are for conan V1.X only and it won't work for versions >=2.0.0
 
 Then, to build and source the workspace:
 
@@ -57,6 +61,25 @@ You can also build against one of the ARMv8 builds of the Kortex API with Conan 
         source devel/setup.bash
 
 As you see, there are instructions to install the Conan package manager. You can learn more about why we use Conan or how to simply download the API and link against it [in this specific section of the kortex_driver readme](kortex_driver/readme.md#conan). You can also decide 
+
+<p><details close>
+<summary>Conan SSL Error</summary>
+
+While running `catkin_make`, you may get a SSL Certificate error similar to this
+
+```sh
+ERROR: HTTPSConnectionPool(host='artifactory.kinovaapps.com', port=443): Max retries exceeded with url: /artifactory/api/conan/conan/v1/ping (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1131)')))
+```
+
+This is because Conan's root certificate expired on 2021-09-30
+
+You can fix this by running
+
+```sh
+conan config install https://github.com/conan-io/conanclientcert.git
+```
+
+ </details></p>
 
 ## Contents
 

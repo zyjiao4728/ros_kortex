@@ -38,7 +38,7 @@ The source code is released under a [BSD 3-Clause license](../LICENSE).
 
 **Author: Kinova inc.<br />
 Affiliation: [Kinova inc.](https://www.kinovarobotics.com/)<br />
-Maintainer: Kinova inc. support@kinovarobotics.com**
+Maintainer: Kinova inc. support@kinova.ca**
 
 This package has been tested under ROS Noetic (Ubuntu 20.04).
 
@@ -230,6 +230,8 @@ Many things have been changed in the ros_kortex repository between versions 1.1.
 
 From release 2.2.0 onwards, the Kortex API is automatically downloaded from our Artifactory Conan server. The steps to install and setup Conan have been added to the root readme file. Conan downloads the binaries and header files in the Conan cache, by default situated in the `~/.conan/` directory.
 
+Note that we only provide packages for the Release and Debug configurations. CMake will pick the most appropriate one given the `CMAKE_BUILD_TYPE` of your catkin workspace.
+
 If you want to learn more about Conan, you can read about it [on their website](https://conan.io/).
 
 If you still want to download the ZIP files for the API, you can find the link in the [Kortex repository](https://github.com/Kinovarobotics/kortex).
@@ -296,6 +298,8 @@ Example use : `roslaunch kortex_driver kortex_dual_driver.launch robot_name:=ter
 Some source code as well as most of the .MSG and .SRV files in this package are automatically generated, but the generated files are given on GitHub so that users don't have to generate them. However, if you have a special version of the Kortex API and want to generate those files yourself, it is possible. You will first need to follow the instructions to install Protocol Buffers.
 
 The generation process is based on a custom `protoc` plugin. Basically, most of the generation process is in the [scripts/ros_kortex_generator.py](scripts/ros_kortex_generator.py). Before launching the generation ensure that you have the Python JINJA2 module installed.
+
+This scripts works with `protobuf-compiler` (`protoc`) version 3.5.1 (see 3.5.X protobuf [github](https://github.com/protocolbuffers/protobuf/tree/3.5.x)). Script was not tested for other versions.
 
 To launch the generation of this package:
 
